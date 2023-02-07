@@ -1,13 +1,8 @@
 package transport;
 
-public class Car {
+public class Car extends Transport {
 
-    private final String brand;
-    private final String model;
     private double engineVolume;
-    private String color;
-    private final int year;
-    private final String country;
     private String transmission;
     private final String typeOfBody;
     private String registrationNumber;
@@ -33,8 +28,8 @@ public class Car {
         }
 
         public String toString() {
-            return (remoteLaunch?"Удаленный запуск двигателя":"Без удаленного запуска двигателя")
-                    + ". " + (withoutKeyAcces?"Доступ без ключа":"Доступ без ключа отсутствует");
+            return (remoteLaunch ? "Удаленный запуск двигателя" : "Без удаленного запуска двигателя")
+                    + ". " + (withoutKeyAcces ? "Доступ без ключа" : "Доступ без ключа отсутствует");
 
         }
     }
@@ -46,6 +41,7 @@ public class Car {
             String color,
             int year,
             String country,
+            int maxSpeed,
             String transmission,
             String typeOfBody,
             String registrationNumber,
@@ -53,31 +49,8 @@ public class Car {
             boolean typeOfTyres,
             Key key
     ) {
-
-        if (brand == null || brand.isEmpty()) {
-            brand = "default";
-        }
-        this.brand = brand;
-
-        if (model == null || model.isEmpty()) {
-            model = "default";
-        }
-        this.model = model;
-
+        super(brand, model, year, country, color, maxSpeed);
         setEngineVolume(engineVolume);
-
-        setColor(color);
-
-        if (year <= 0) {
-            year = 2000;
-        }
-        this.year = year;
-
-        if (country == null || country.isEmpty()) {
-            country = "default";
-        }
-        this.country = country;
-
         setTransmission(transmission);
 
         if (typeOfBody == null || typeOfBody.isEmpty()) {
@@ -97,13 +70,6 @@ public class Car {
         setKey(key);
     }
 
-    public String getBrand() {
-        return brand;
-    }
-
-    public String getModel() {
-        return model;
-    }
 
     public double getEngineVolume() {
         return engineVolume;
@@ -114,25 +80,6 @@ public class Car {
             engineVolume = 1.5;
         }
         this.engineVolume = engineVolume;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        if (color == null || color.isEmpty()) {
-            color = "белый";
-        }
-        this.color = color;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public String getCountry() {
-        return country;
     }
 
     public String getTransmission() {
@@ -178,7 +125,7 @@ public class Car {
     }
 
     public void setKey(Key key) {
-        if(key == null) {
+        if (key == null) {
             key = new Key(false, false);
         }
         this.key = key;
@@ -196,18 +143,15 @@ public class Car {
 
     @Override
     public String toString() {
-        return "Марка: " + brand +
-                ". Модель: " + model +
-                ". Объем двигателя в литрах: " + engineVolume +
-                ". Цвет кузова " + color +
-                ". Год производства: " + year +
-                ". Страна сборки: " + country +
-                ". Коробка передач: " + transmission +
-                ". Тип корпуса: " + typeOfBody +
-                ". Регистрационный номер: " + registrationNumber +
-                ". Количество мест: " + numberOfSeats + ". " +
-                (typeOfTyres ? "Зимняя резина" : "Летняя резина") +
-                ". " + key + ".";
+        return
+                super.toString() +
+                        ". Объем двигателя в литрах: " + engineVolume +
+                        ". Коробка передач: " + transmission +
+                        ". Тип корпуса: " + typeOfBody +
+                        ". Регистрационный номер: " + registrationNumber +
+                        ". Количество мест: " + numberOfSeats + ". " +
+                        (typeOfTyres ? "Зимняя резина" : "Летняя резина") +
+                        ". " + key + ".";
     }
 }
 
