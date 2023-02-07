@@ -1,3 +1,4 @@
+import transport.Bus;
 import transport.Car;
 
 public class Main {
@@ -9,6 +10,7 @@ public class Main {
                 "жёлтый",
                 2015,
                 "Россия",
+                150,
                 "Механическая КПП",
                 null,
                 null,
@@ -27,6 +29,7 @@ public class Main {
                 "чёрный",
                 2020,
                 " Германия",
+                220,
                 "Автоматическая КПП",
                 "Седан",
                 "М245КВ 178",
@@ -45,6 +48,7 @@ public class Main {
                 "чёрный",
                 2021,
                 "Германия",
+                235,
                 "Автматическая КПП",
                 null,
                 "А322ВА 97",
@@ -64,6 +68,7 @@ public class Main {
                 "красный",
                 2018,
                 "Южная Корея",
+                180,
                 "Механическая КПП",
                 null,
                 null,
@@ -82,6 +87,7 @@ public class Main {
                 "оранжевый",
                 2016,
                 "Южная Корея",
+                190,
                 "Механическая КПП",
                 null,
                 "К022ВА 98",
@@ -94,6 +100,18 @@ public class Main {
 
         hyundai.changeTyres(8);
         System.out.println(hyundai);
+
+        for (int i = 1; i <= 3; i++) {
+            Bus bus = new Bus(
+                    "Bus brand №" + i,
+                    "Bus model №" + i,
+                    2015 + i,
+                    "Россия",
+                    "Белый",
+                    90 + 10 * i
+            );
+            System.out.println(bus);
+        }
 
     }
 }
