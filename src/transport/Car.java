@@ -1,157 +1,41 @@
 package transport;
 
-public class Car extends Transport {
-
-    private double engineVolume;
-    private String transmission;
-    private final String typeOfBody;
-    private String registrationNumber;
-    private final int numberOfSeats;
-    private boolean typeOfTyres;
-    private Key key;
-
-    public static class Key {
-        public final boolean remoteLaunch;
-        public final boolean withoutKeyAcces;
-
-        public Key(boolean remoteLaunch, boolean withoutKeyAcces) {
-            this.remoteLaunch = remoteLaunch;
-            this.withoutKeyAcces = withoutKeyAcces;
-        }
-
-        public boolean isRemoteLaunch() {
-            return remoteLaunch;
-        }
-
-        public boolean isWithoutKeyAcces() {
-            return withoutKeyAcces;
-        }
-
-        public String toString() {
-            return (remoteLaunch ? "Удаленный запуск двигателя" : "Без удаленного запуска двигателя")
-                    + ". " + (withoutKeyAcces ? "Доступ без ключа" : "Доступ без ключа отсутствует");
-
-        }
-    }
-
-    public Car(
-            String brand,
-            String model,
-            double engineVolume,
-            String color,
-            int year,
-            String country,
-            int maxSpeed,
-            String transmission,
-            String typeOfBody,
-            String registrationNumber,
-            int numberOfSeats,
-            boolean typeOfTyres,
-            Key key
-    ) {
-        super(brand, model, year, country, color, maxSpeed);
-        setEngineVolume(engineVolume);
-        setTransmission(transmission);
-
-        if (typeOfBody == null || typeOfBody.isEmpty()) {
-            typeOfBody = "Седан";
-        }
-        this.typeOfBody = typeOfBody;
-
-        setRegistrationNumber(registrationNumber);
-
-        if (numberOfSeats <= 0) {
-            numberOfSeats = 5;
-        }
-        this.numberOfSeats = numberOfSeats;
-
-        this.typeOfTyres = typeOfTyres;
-
-        setKey(key);
-    }
+public class Car extends Transport<DriverCategoryB> {
 
 
-    public double getEngineVolume() {
-        return engineVolume;
-    }
-
-    public void setEngineVolume(double engineVolume) {
-        if (engineVolume <= 0) {
-            engineVolume = 1.5;
-        }
-        this.engineVolume = engineVolume;
-    }
-
-    public String getTransmission() {
-        return transmission;
-    }
-
-    public void setTransmission(String transmission) {
-        if (transmission == null || transmission.isEmpty()) {
-            transmission = "Механическая КПП";
-        }
-        this.transmission = transmission;
-    }
-
-    public String getTypeOfBody() {
-        return typeOfBody;
-    }
-
-    public String getRegistrationNumber() {
-        return registrationNumber;
-    }
-
-    public void setRegistrationNumber(String registrationNumber) {
-        if (registrationNumber == null || registrationNumber.isEmpty()) {
-            registrationNumber = "Автомобиль не зарегистрирован в ГИБДД";
-        }
-        this.registrationNumber = registrationNumber;
-    }
-
-    public int getNumberOfSeats() {
-        return numberOfSeats;
-    }
-
-    public boolean isTypeOfTyres() {
-        return typeOfTyres;
-    }
-
-    public void setTypeOfTyres(boolean typeOfTyres) {
-        this.typeOfTyres = typeOfTyres;
-    }
-
-    public Key getKey() {
-        return key;
-    }
-
-    public void setKey(Key key) {
-        if (key == null) {
-            key = new Key(false, false);
-        }
-        this.key = key;
-    }
-
-    public void changeTyres(int month) {
-        if ((month >= 11 && month <= 12) || (month >= 1 && month <= 3)) {
-            typeOfTyres = true;
-        }
-        if ((month >= 4 && month <= 10)) {
-            typeOfTyres = false;
-        }
-
+    public Car(String brand, String model, double engineVolume, DriverCategoryB driver) {
+        super(brand, model, engineVolume, driver);
     }
 
     @Override
-    public String toString() {
-        return
-                super.toString() +
-                        ". Объем двигателя в литрах: " + engineVolume +
-                        ". Коробка передач: " + transmission +
-                        ". Тип корпуса: " + typeOfBody +
-                        ". Регистрационный номер: " + registrationNumber +
-                        ". Количество мест: " + numberOfSeats + ". " +
-                        (typeOfTyres ? "Зимняя резина" : "Летняя резина") +
-                        ". " + key + ".";
+    public void startMove() {
+        System.out.println("Автомобиль марки " + getBrand() + " начал движение.");
+    }
+
+    @Override
+    public void finishMove() {
+        System.out.println("Автомобиль марки " + getBrand() + " закончил движение.");
+    }
+
+    @Override
+    public void pitstop() {
+        System.out.println("Пит-стоп у автомобиля.");
+    }
+
+    @Override
+    public void bestCircleTime() {
+        int minTime = 10;
+        int maxTime = 15;
+        double bestTimeInMinutes = minTime + (maxTime - minTime) * Math.random();
+        System.out.println("Лучшее время круга у автомобиля в минутах: " + bestTimeInMinutes);
+    }
+
+    @Override
+    public void maxSpeed() {
+        int minSpeed = 100;
+        int maxSpeed = 170;
+        double bestSpeed = minSpeed + (maxSpeed - minSpeed) * Math.random();
+        System.out.println("Максимальная скорость у автомобиля: " + bestSpeed);
     }
 }
 
