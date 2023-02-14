@@ -2,9 +2,42 @@ package transport;
 
 public class Car extends Transport<DriverCategoryB> {
 
+    private TypeOfBoxes typeOfBoxes;
 
-    public Car(String brand, String model, double engineVolume, DriverCategoryB driver) {
+    public enum TypeOfBoxes {
+        SEDAN("Седан"),
+        HATCHBACK("Хетчбэк"),
+        COUPE("Купе"),
+        STATIONWAGON("Универсал"),
+        ROADSTER("Внедорожник"),
+        CROSSOVER("Кроссовер"),
+        PICKUP("Пикап"),
+        VAN("Фургон"),
+        MINIVAN("Минивэн");
+
+        private String box;
+
+        TypeOfBoxes(String box) {
+            this.box = box;
+        }
+
+        public String getBox() {
+            return box;
+        }
+
+        @Override
+        public String toString() {
+            return "Тип кузова: " + box;
+        }
+    }
+
+    public Car(String brand, String model, double engineVolume, DriverCategoryB driver, TypeOfBoxes typeOfBoxes) {
         super(brand, model, engineVolume, driver);
+        this.typeOfBoxes = typeOfBoxes;
+    }
+
+    public TypeOfBoxes getTypeOfBoxes() {
+        return typeOfBoxes;
     }
 
     @Override
@@ -15,6 +48,18 @@ public class Car extends Transport<DriverCategoryB> {
     @Override
     public void finishMove() {
         System.out.println("Автомобиль марки " + getBrand() + " закончил движение.");
+    }
+
+    @Override
+    public Type getType() {
+        return Type.CAR;
+    }
+
+    @Override
+    public void printType() {
+        if (typeOfBoxes == null) {
+            System.out.println("Данных по транспортному средству недостаточно");
+        } else System.out.println(typeOfBoxes);
     }
 
     @Override
@@ -36,6 +81,12 @@ public class Car extends Transport<DriverCategoryB> {
         int maxSpeed = 170;
         double bestSpeed = minSpeed + (maxSpeed - minSpeed) * Math.random();
         System.out.println("Максимальная скорость у автомобиля: " + bestSpeed);
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + " " + typeOfBoxes;
+
     }
 }
 

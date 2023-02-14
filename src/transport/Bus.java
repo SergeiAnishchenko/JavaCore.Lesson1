@@ -2,9 +2,55 @@ package transport;
 
 public class Bus extends Transport<DriverCategoryD> {
 
+    private Capacity capacity;
 
-    public Bus(String brand, String model, double engineVolume, DriverCategoryD driver) {
+    public enum Capacity {
+        ESPECIALLYSMALL(0, 10),
+        SMALL(11, 25),
+        MIDDLE(26, 50),
+        BIG(51, 80),
+        ESPECIALLYBIG(81, 120);
+
+
+        private Integer minСapacity;
+        private Integer maxСapacity;
+
+        Capacity(Integer minСapacity, Integer maxСapacity) {
+            this.minСapacity = minСapacity;
+            this.maxСapacity = maxСapacity;
+        }
+
+        public Integer getMinСapacity() {
+            return minСapacity;
+        }
+
+        public Integer getMaxСapacity() {
+            return maxСapacity;
+        }
+
+        @Override
+        public String toString() {
+            String capacity = null;
+            if (minСapacity == null) {
+                capacity = "Вместимость: до " + maxСapacity + " мест.";
+            }
+            if (maxСapacity == null) {
+                capacity = "Вместимость: от " + minСapacity + " мест.";
+            }
+            if (minСapacity != null && maxСapacity != null) {
+                capacity = "Вместимость: от " + minСapacity + " до " + maxСapacity + " мест.";
+            }
+
+            return capacity;
+        }
+
+        ;
+    }
+
+
+    public Bus(String brand, String model, double engineVolume, DriverCategoryD driver, Capacity capacity) {
         super(brand, model, engineVolume, driver);
+        this.capacity = capacity;
     }
 
     @Override
@@ -15,6 +61,18 @@ public class Bus extends Transport<DriverCategoryD> {
     @Override
     public void finishMove() {
         System.out.println("Автобус марки " + getBrand() + " закончил движение.");
+    }
+
+    @Override
+    public Type getType() {
+        return Type.BUS;
+    }
+
+    @Override
+    public void printType() {
+        if (capacity == null) {
+            System.out.println("Данных по транспортному средству недостаточно");
+        } else System.out.println(capacity);
     }
 
     @Override
@@ -36,5 +94,10 @@ public class Bus extends Transport<DriverCategoryD> {
         int maxSpeed = 100;
         double bestSpeed = minSpeed + (maxSpeed - minSpeed) * Math.random();
         System.out.println("Максимальная скорость у автобуса: " + bestSpeed);
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + " " + capacity;
     }
 }
