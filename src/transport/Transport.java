@@ -52,11 +52,14 @@ public abstract class Transport<T extends Driver> implements Competing {
 
     public abstract void finishMove();
 
+    public abstract Type getType();
+
+    public abstract void printType();
 
     public String toString() {
         return "Марка: " + brand +
                 ". Модель: " + model +
-                ". Объем двигателя: " + engineVolume;
+                ". Объем двигателя: " + engineVolume + ".";
 
     }
 }
