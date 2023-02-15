@@ -40,6 +40,9 @@ public class Main {
             printInfo(truck);
 
         }
+
+        System.out.println();
+
         Car newCar = new Car(
                 "Жигули",
                 "Копейка",
@@ -48,6 +51,31 @@ public class Main {
                 Car.TypeOfBoxes.SEDAN);
         System.out.println(newCar.getType());
         newCar.printType();
+        newCar.passDiagnostic();
+
+        System.out.println();
+
+        Truck newTruck = new Truck(
+                "БелАЗ",
+                "БелАЗ-75320",
+                130.0,
+                new DriverCategoryC("Олег", true, 15),
+                Truck.LoadCapacity.N3);
+        System.out.println(newTruck.getType());
+        newTruck.printType();
+        newTruck.passDiagnostic();
+
+        System.out.println();
+
+        Bus newBus = new Bus(
+                "ПАЗ",
+                "ПАЗ 3204",
+                4.43,
+                new DriverCategoryD("Андрей", true, 17),
+                Bus.Capacity.BIG);
+        System.out.println(newBus.getType());
+        newBus.printType();
+        newBus.passDiagnostic();
     }
 
     private static void printInfo(Transport<?> transport) {

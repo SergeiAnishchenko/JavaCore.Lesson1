@@ -63,6 +63,14 @@ public class Car extends Transport<DriverCategoryB> {
     }
 
     @Override
+    public void passDiagnostic() {
+        if (getType() == Type.CAR) {
+            System.out.println("Автомобилю нужно пройти диагностику.");
+        }
+
+    }
+
+    @Override
     public void pitstop() {
         System.out.println("Пит-стоп у автомобиля.");
     }
