@@ -73,6 +73,13 @@ public class Truck extends Transport<DriverCategoryC> {
     }
 
     @Override
+    public void passDiagnostic() {
+        if (getType() == Type.TRUCK) {
+            System.out.println("Грузовику нужно пройти диагностику.");
+        }
+    }
+
+    @Override
     public void pitstop() {
         System.out.println("Пит-стоп у грузовика.");
     }

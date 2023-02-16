@@ -76,6 +76,18 @@ public class Bus extends Transport<DriverCategoryD> {
     }
 
     @Override
+    public void passDiagnostic() {
+        if (getType() == Type.BUS) {
+            try {
+                throw new TransportTypeException("Автобусам проходить диагностику не нужно.");
+            } catch (TransportTypeException e) {
+                System.err.println(e.getMessage());
+            }
+        }
+
+    }
+
+    @Override
     public void pitstop() {
         System.out.println("Пит-стоп у автобуса.");
     }
