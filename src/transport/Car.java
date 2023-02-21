@@ -1,8 +1,11 @@
 package transport;
 
+import java.util.List;
+
 public class Car extends Transport<DriverCategoryB> {
 
     private TypeOfBoxes typeOfBoxes;
+
 
     public enum TypeOfBoxes {
         SEDAN("Седан"),
@@ -31,13 +34,17 @@ public class Car extends Transport<DriverCategoryB> {
         }
     }
 
-    public Car(String brand, String model, double engineVolume, DriverCategoryB driver, TypeOfBoxes typeOfBoxes) {
-        super(brand, model, engineVolume, driver);
+    public Car(String brand, String model, double engineVolume, DriverCategoryB driver, List<Mechanic> mechanics, TypeOfBoxes typeOfBoxes) {
+        super(brand, model, engineVolume, driver, mechanics);
         this.typeOfBoxes = typeOfBoxes;
     }
 
     public TypeOfBoxes getTypeOfBoxes() {
         return typeOfBoxes;
+    }
+
+    public void setTypeOfBoxes(TypeOfBoxes typeOfBoxes) {
+        this.typeOfBoxes = typeOfBoxes;
     }
 
     @Override
