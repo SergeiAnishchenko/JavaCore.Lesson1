@@ -1,5 +1,7 @@
 package transport;
 
+import java.util.Objects;
+
 public abstract class Driver {
 
     private String name;
@@ -42,5 +44,21 @@ public abstract class Driver {
 
     public abstract void refill();
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Driver)) return false;
+        Driver driver = (Driver) o;
+        return hasDriverLicense == driver.hasDriverLicense && experienceInYears == driver.experienceInYears && name.equals(driver.name);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, hasDriverLicense, experienceInYears);
+    }
+
+    @Override
+    public String toString() {
+        return "Водитель " + name + " имеет водительское удостоверение требуемой категории. Стаж вождения " + experienceInYears + " лет.";
+    }
 }
