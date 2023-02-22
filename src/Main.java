@@ -1,7 +1,20 @@
 import transport.*;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+
 public class Main {
     public static void main(String[] args) {
+        List<Mechanic> mechanics = new ArrayList<>();
+        Mechanic mechanic1 = new Mechanic("Иван Игнатьев", "Автосервис№1");
+        Mechanic mechanic2 = new Mechanic("Артем Иванов", "Автосервис№2");
+        Mechanic mechanic3 = new Mechanic("Олег Соколов", "Автосервис№3");
+        mechanics.add(mechanic1);
+        mechanics.add(mechanic2);
+        mechanics.add(mechanic3);
+
 
         for (int i = 1; i <= 4; i++) {
             DriverCategoryB driverCategoryB = new DriverCategoryB("Водитель категории B №" + i, true, 3 + i);
@@ -11,6 +24,7 @@ public class Main {
                     "Car model №" + i,
                     1.6,
                     driverCategoryB,
+                    mechanics,
                     typesOfBoxes
             );
             DriverCategoryC driverCategoryC = new DriverCategoryC("Водитель категории С №" + i, true, 5 + i);
@@ -20,6 +34,7 @@ public class Main {
                     "Truck model №" + i,
                     4.5,
                     driverCategoryC,
+                    mechanics,
                     loadCapacity
             );
             DriverCategoryD driverCategoryD = new DriverCategoryD("Водитель категории D №" + i, true, 7 + i);
@@ -29,6 +44,7 @@ public class Main {
                     "Bus model №" + i,
                     4.0,
                     driverCategoryD,
+                    mechanics,
                     capacity
             );
             System.out.println(car);
@@ -48,6 +64,7 @@ public class Main {
                 "Копейка",
                 1.2,
                 new DriverCategoryB("Валерий", true, 35),
+                mechanics,
                 Car.TypeOfBoxes.SEDAN);
         System.out.println(newCar.getType());
         newCar.printType();
@@ -60,6 +77,7 @@ public class Main {
                 "БелАЗ-75320",
                 130.0,
                 new DriverCategoryC("Олег", true, 15),
+                mechanics,
                 Truck.LoadCapacity.N3);
         System.out.println(newTruck.getType());
         newTruck.printType();
@@ -72,10 +90,37 @@ public class Main {
                 "ПАЗ 3204",
                 4.43,
                 new DriverCategoryD("Андрей", true, 17),
+                mechanics,
                 Bus.Capacity.BIG);
         System.out.println(newBus.getType());
         newBus.printType();
         newBus.passDiagnostic();
+
+        System.out.println();
+
+        System.out.println(newBus.getMechanics());
+
+        System.out.println();
+
+        List<Transport> transportList = new ArrayList<>();
+        transportList.add(newCar);
+        transportList.add(newTruck);
+        transportList.add(newBus);
+        for (Transport transport : transportList) {
+            System.out.println("Водитель " + transport.getDriver().getName() + ". " + transport.getMechanics().get(1));
+        }
+
+        System.out.println();
+
+        ServiceStation serviceStation = new ServiceStation();
+        Queue<Transport> queueOfCars = new LinkedList<>();
+        serviceStation.addToQueue(newCar);
+        serviceStation.addToQueue(newTruck);
+        serviceStation.addToQueue(newBus);
+        System.out.println();
+        serviceStation.conductOfTechnicalInspection();
+        System.out.println();
+
     }
 
     private static void printInfo(Transport<?> transport) {

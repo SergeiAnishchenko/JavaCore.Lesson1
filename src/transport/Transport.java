@@ -1,14 +1,21 @@
 package transport;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Transport<T extends Driver> implements Competing {
 
     private final String brand;
     private final String model;
     private double engineVolume;
     private T driver;
+    List<Mechanic> mechanics = new ArrayList<>();
 
 
-    public Transport(String brand, String model, double engineVolume, T driver) {
+
+
+
+    public Transport(String brand, String model, double engineVolume, T driver, List<Mechanic> mechanics) {
         if (brand == null || brand.isEmpty()) {
             brand = "default";
         }
@@ -19,6 +26,7 @@ public abstract class Transport<T extends Driver> implements Competing {
         this.model = model;
         setEngineVolume(engineVolume);
         setDriver(driver);
+        setMechanics(mechanics);
     }
 
     public String getBrand() {
@@ -48,6 +56,14 @@ public abstract class Transport<T extends Driver> implements Competing {
         this.driver = driver;
     }
 
+    public List<Mechanic> getMechanics() {
+        return mechanics;
+    }
+
+    public void setMechanics(List<Mechanic> mechanics) {
+        this.mechanics = mechanics;
+    }
+
     public abstract void startMove();
 
     public abstract void finishMove();
@@ -62,6 +78,11 @@ public abstract class Transport<T extends Driver> implements Competing {
         return "Марка: " + brand +
                 ". Модель: " + model +
                 ". Объем двигателя: " + engineVolume + ".";
+
+    }
+
+    public String toString2() {
+        return model;
 
     }
 }
