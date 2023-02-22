@@ -118,12 +118,34 @@ public class Main {
         serviceStation.conductOfTechnicalInspection();
         System.out.println();
 
+
+        Set<Driver> drivers = new HashSet<>();
+        // Создаю трёх водителей, два из которых по своим параметрам аналогичны водителям ранее созданных транспоотных средств.
+        DriverCategoryB driverCategoryB = new DriverCategoryB("Валерий", true, 35);
+        DriverCategoryC driverCategoryC = new DriverCategoryC("Иван", true, 15);
+        DriverCategoryD driverCategoryD = new DriverCategoryD("Андрей", true, 17);
+
+        // пробую добавить в множество 6 водителей, 2 из которых имеют аналогов в ранее созданных транспортных средствах.
+        drivers.add(driverCategoryB);
+        drivers.add(driverCategoryC);
+        drivers.add(driverCategoryD);
+        drivers.add(newCar.getDriver());
+        drivers.add(newTruck.getDriver());
+        drivers.add(newBus.getDriver());
+
+        // вывожу информацию о вошедших в множество водителях.
+        for (Driver driver : drivers) {
+            System.out.println(driver);
+        }
+        //дополнительно проверяю количество водителей в списке.
+        System.out.println(drivers.size());
+        System.out.println();
+
     }
 
     private static void printInfo(Transport<?> transport) {
         System.out.println("Водитель " + transport.getDriver().getName() + " управляет автомобилем " + transport.getBrand());
 
     }
-
 
 }
