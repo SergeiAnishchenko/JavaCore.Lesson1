@@ -141,6 +141,12 @@ public class Main {
         System.out.println(drivers.size());
         System.out.println();
 
+        // создаю итератор для вывода всех водителей в консоль
+        Iterator<Driver> iteratorDrivers = drivers.iterator();
+        while (iteratorDrivers.hasNext()) {
+            System.out.println(iteratorDrivers.next());
+        }
+
     }
 
     private static void printInfo(Transport<?> transport) {
