@@ -147,6 +147,18 @@ public class Main {
             System.out.println(iteratorDrivers.next());
         }
 
+
+
+        Map<Transport, List<Mechanic>> mapTransportMechanic = new HashMap<>();
+
+        mapTransportMechanic.put(newCar,mechanics);
+        mapTransportMechanic.put(newTruck,mechanics);
+        mapTransportMechanic.put(newBus,mechanics);
+
+        for (Map.Entry<Transport,List<Mechanic>> entry:mapTransportMechanic.entrySet()) {
+            System.out.println(entry.getKey() + " " + entry.getValue());
+        }
+
     }
 
     private static void printInfo(Transport<?> transport) {
